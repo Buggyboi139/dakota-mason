@@ -109,6 +109,21 @@ ul.points li::before{content:"";position:absolute;left:4px;top:19px;width:10px;h
 .proj p{font-size:14.5px;margin:0;color:var(--muted)}
 .proj .tag{font:500 11.5px "JetBrains Mono",monospace;color:var(--accent2);text-transform:uppercase;letter-spacing:.08em}
 .proj .go{margin-top:auto;font-size:14px;font-weight:600;display:flex;gap:14px;flex-wrap:wrap}
+.feature{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;margin:22px 0;display:flex;flex-direction:column;gap:10px}
+.feature h3{margin:4px 0 2px;font-size:24px}
+.feature .tag{font:500 11.5px "JetBrains Mono",monospace;color:var(--accent2);text-transform:uppercase;letter-spacing:.08em}
+.feature img{border-radius:12px;border:1px solid var(--line);aspect-ratio:16/8;object-fit:cover;width:100%}
+.feature .go{font-weight:600;display:flex;gap:16px;flex-wrap:wrap;margin-top:auto}
+.feature .muted{color:var(--muted);font-size:14.5px}
+.feature.tak{background:radial-gradient(600px 300px at 100% 0%,rgba(91,140,255,.18),transparent 60%),radial-gradient(500px 260px at 0% 100%,rgba(56,225,198,.12),transparent 60%),var(--card);border-color:rgba(56,225,198,.35)}
+.feature-pair{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.feature-pair .feature{margin:0}
+.bench{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:12px;margin:6px 0 8px}
+.bench-card{background:rgba(7,11,20,.55);border:1px solid var(--line);border-radius:14px;padding:16px}
+.bench-card b{display:block;font-size:30px;letter-spacing:-.02em;margin:4px 0;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.bench-card span:last-child{color:var(--muted);font-size:14px}
+.bench-card strong{color:var(--text)}
+.hero-bench{border-color:rgba(56,225,198,.4)}
 .book{display:grid;grid-template-columns:260px 1fr;gap:28px;align-items:center}
 .book img{border-radius:10px;box-shadow:0 30px 60px rgba(0,0,0,.55),0 0 0 1px var(--line)}
 .timeline{position:relative;margin:8px 0 0;padding-left:22px;border-left:2px solid var(--line)}
@@ -130,7 +145,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
   .tab{flex:0 0 auto}
   .tab small{display:none}
   .tab[aria-selected="true"]{box-shadow:inset 0 -3px 0 var(--accent)}
-  .role,.book{grid-template-columns:1fr}
+  .role,.book,.feature-pair,.bench{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -200,7 +215,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
             <li>Investigating cross-site scripting (XSS) and server-side request forgery (SSRF) findings, with reports that describe impact and repeatable steps.</li>
             <li>Building Burp Cockpit, a Burp Suite extension that adds AI-assisted analysis to web security testing.</li>
             <li>Running a Linux home lab: building and troubleshooting systems, and evaluating local AI models.</li>
-            <li>Leading independent software projects from design through testing, including a Rust and C++ model-quantization tool and a 960-item language-model evaluation suite.</li>
+            <li>Building TAK, a Rust and C++ model-quantization tool whose published models beat a leading quantizer at the same file size (see Projects).</li>
           </ul>
           <h3>Tools</h3>
           <div class="chips"><span class="chip">Burp Suite</span><span class="chip">Nmap</span><span class="chip">Nessus</span><span class="chip">Greenbone</span><span class="chip">AWS</span><span class="chip">Linux</span><span class="chip">Python</span><span class="chip">Git</span><span class="chip">Rust</span><span class="chip">C++</span></div>
@@ -323,27 +338,66 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
     <section class="panel" id="projects" role="tabpanel" aria-labelledby="t-projects">
       <span class="kicker">Things I've built</span>
       <h2>Projects</h2>
-      <p>Security tooling, AI model research, and production web apps I designed, built, and shipped.</p>
+      <p>AI model research, production web apps, and security tooling I designed, built, and shipped.</p>
 
-      <h3>Security and AI</h3>
+      <article class="feature tak">
+        <div class="feature-head">
+          <span class="tag">Flagship · Rust · C++ · CUDA</span>
+          <h3>TAK: task-aware model quantization</h3>
+          <p>TAK shrinks large language models to a fixed file size while protecting the skill you care about. Instead of compressing every tensor the same way, it measures how each precision change affects a target task, solves for the best allocation under an exact byte budget, and exports a standard GGUF that runs anywhere llama.cpp does. No fine-tuning, no model merging: only smarter precision.</p>
+        </div>
+        <div class="bench">
+          <div class="bench-card hero-bench">
+            <span class="kicker">Qwen3.8-27B · reasoning</span>
+            <b>82.81 vs 77.34</b>
+            <span>TAK beat Unsloth's UD-IQ2_S by <strong>+5.47 points</strong> at the identical 8.37 GB file size, landing within 0.78 points of the 54.7 GB original: <strong>85% smaller</strong> for nearly the same reasoning.</span>
+          </div>
+          <div class="bench-card">
+            <span class="kicker">Gemma 4 E4B · reasoning</span>
+            <b>+14.06</b>
+            <span>points over Unsloth UD-IQ2_M, with a 9% smaller file</span>
+          </div>
+          <div class="bench-card">
+            <span class="kicker">Qwen3.5-4B · reasoning</span>
+            <b>+11.72</b>
+            <span>points over Unsloth UD-IQ2_M at the same size</span>
+          </div>
+        </div>
+        <ul class="points">
+          <li>Every score comes from the same frozen 960-item evaluation pack, run to completion with zero failed items. The headline is the run's target category; the other suites are diagnostics.</li>
+          <li>Rust application with a C++ worker on a pinned llama.cpp runtime. Runs on Vulkan or CUDA, with resumable, checkpointed jobs and a headless GPU deployment for models too large for a workstation.</li>
+          <li>Measures real tensor-format changes against the task's own grader, including executed-test grading for coding, and records signed effects of each change, alone and in pairs.</li>
+          <li>Published winners on Hugging Face as the TAK Reasoning Champions collection.</li>
+        </ul>
+        <div class="go"><a href="https://huggingface.co/collections/ByteOtter/tak-reasoning-champions-6a9f09c206557492a82905f3" target="_blank" rel="noopener">TAK Reasoning Champions →</a><a href="https://huggingface.co/ByteOtter" target="_blank" rel="noopener">All models →</a><span style="color:var(--dim)">Source is private</span></div>
+      </article>
+
+      <div class="feature-pair">
+        <article class="feature">
+          <img src="assets/img/ironmargins.jpg" alt="Iron Margins home page" loading="lazy">
+          <span class="tag">SaaS · PWA · Supabase</span>
+          <h3>Iron Margins</h3>
+          <p>Estimating, bidding, and invoicing software for contractors. It standardizes material costs, calculates true labor burden, including payroll taxes and workers' comp, and generates client-ready PDF proposals in minutes. Built as an offline-capable progressive web app.</p>
+          <p class="muted">Designed with a written threat model covering client-side trust, authorization bypass, and service-worker hijacking, with server-side validation and a strict Content Security Policy as mitigations.</p>
+          <div class="go"><a href="https://ironmargins.com" target="_blank" rel="noopener">ironmargins.com →</a><a href="https://github.com/Buggyboi139/ironmargins" target="_blank" rel="noopener">GitHub →</a></div>
+        </article>
+        <article class="feature">
+          <img src="assets/img/pearltide.jpg" alt="Pearl Tide game art" loading="lazy">
+          <span class="tag">Mobile game · Three.js · Capacitor</span>
+          <h3>Pearl Tide</h3>
+          <p>A cozy 3D mermaid game for iPhone and Android. Players swim a reef, a kelp forest, and crystal caverns, help the sea creatures they meet, and decorate a home in a sunken ship across a four-chapter story.</p>
+          <p class="muted">Built in Three.js and wrapped for iOS and Android with Capacitor, with touch and desktop controls and adjustable graphics levels for phones.</p>
+          <div class="go"><a href="https://pearltide.world/" target="_blank" rel="noopener">pearltide.world →</a></div>
+        </article>
+      </div>
+
+      <h3>More projects</h3>
       <div class="grid">
         <div class="proj"><span class="tag">Security tooling</span><h4>Burp Cockpit</h4><p>A Burp Suite extension that adds AI-assisted analysis to web security testing.</p><div class="go"><span style="color:var(--dim)">Private repo</span></div></div>
-        <div class="proj"><span class="tag">AI models</span><h4>Hugging Face models</h4><p>Four published quantized reasoning models (Gemma and Qwen) with more than 4,000 downloads.</p><div class="go"><a href="https://huggingface.co/ByteOtter" target="_blank" rel="noopener">View models →</a></div></div>
-        <div class="proj"><span class="tag">Rust · C++</span><h4>TAK</h4><p>Task-aware GGUF model quantization with headless CUDA GPU deployment.</p><div class="go"><span style="color:var(--dim)">Private repo</span></div></div>
-        <div class="proj"><span class="tag">Evaluation</span><h4>QPipe &amp; eval suite</h4><p>Category-directed GGUF precision allocation under an exact byte budget, measured with a 960-item language-model evaluation suite.</p><div class="go"><span style="color:var(--dim)">Private repo</span></div></div>
         <div class="proj"><span class="tag">Python</span><h4>Glass Skull</h4><p>A local Streamlit cockpit for running GGUF models through llama.cpp and visualizing model activity.</p><div class="go"><a href="https://github.com/Buggyboi139/glass-skull" target="_blank" rel="noopener">GitHub →</a></div></div>
         <div class="proj"><span class="tag">Python</span><h4>smol-llm</h4><p>A tiny GPT-style language model built from scratch for testing tokenizers, data quality, and training behavior.</p><div class="go"><a href="https://github.com/Buggyboi139/smol-llm" target="_blank" rel="noopener">GitHub →</a></div></div>
         <div class="proj"><span class="tag">JavaScript</span><h4>LlamaCalc</h4><p>A static command workbench that builds llama-cli and llama-server commands in the browser.</p><div class="go"><a href="https://llamabuilding.com/" target="_blank" rel="noopener">Live site →</a><a href="https://github.com/Buggyboi139/llamacalc" target="_blank" rel="noopener">GitHub →</a></div></div>
-      </div>
-
-      <h3>Web apps and sites</h3>
-      <div class="grid">
-        <div class="proj"><span class="tag">SaaS · PWA</span><h4>Iron Margins</h4><p>Estimating, bidding, and invoice management for contractors, built as a progressive web app.</p><div class="go"><a href="https://ironmargins.com" target="_blank" rel="noopener">Live site →</a><a href="https://github.com/Buggyboi139/ironmargins" target="_blank" rel="noopener">GitHub →</a></div></div>
-        <div class="proj"><span class="tag">Game · PWA</span><h4>Glyphlo</h4><p>An offline-capable word puzzle game: untangle scrambled letters on a circular node graph.</p><div class="go"><a href="https://glyphlo.com" target="_blank" rel="noopener">Play →</a><a href="https://github.com/Buggyboi139/glyphlo" target="_blank" rel="noopener">GitHub →</a></div></div>
         <div class="proj"><span class="tag">Game · PWA</span><h4>Hostile Volume</h4><p>A browser game with client-side state management and audio rendering.</p><div class="go"><a href="https://hostilevolume.com" target="_blank" rel="noopener">Play →</a><a href="https://github.com/Buggyboi139/hostilevolume" target="_blank" rel="noopener">GitHub →</a></div></div>
-        <div class="proj"><span class="tag">Web app</span><h4>Two Player</h4><p>A two-player web app.</p><div class="go"><a href="https://two-player.app/" target="_blank" rel="noopener">Live site →</a><a href="https://github.com/Buggyboi139/twoplayer" target="_blank" rel="noopener">GitHub →</a></div></div>
-        <div class="proj"><span class="tag">Client site</span><h4>Whittemore Painting</h4><p>A brochure site for a residential and commercial painting contractor.</p><div class="go"><a href="https://whittemorepainting.com" target="_blank" rel="noopener">Live site →</a><a href="https://github.com/Buggyboi139/whittemore-painting" target="_blank" rel="noopener">GitHub →</a></div></div>
-        <div class="proj"><span class="tag">Mobile game</span><h4>Pearl Tide</h4><p>A mermaid dress-up and decorating game for iPhone and Android.</p><div class="go"><a href="https://github.com/Buggyboi139/pearl-tide-site" target="_blank" rel="noopener">Support site →</a></div></div>
       </div>
     </section>
 
