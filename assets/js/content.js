@@ -103,7 +103,7 @@
         ],
         note: { heading: 'Why it matters for security', text: 'Incident response, chain of custody, insider-threat awareness, and writing findings that hold up to review: the same habits a SOC depends on.' },
         tools: [],
-        photo: { src: url('assets/img/va.jpg'), w: 1200, h: 1600, alt: 'Dakota Mason in VA police uniform', caption: 'On duty at the VA, 2024' },
+        photo: { src: url('assets/img/va-police.jpg'), w: 638, h: 953, alt: 'Dakota Mason in VA police uniform in front of the Department of Veterans Affairs seal and a U.S. flag', caption: 'Department of Veterans Affairs Police' },
       },
       {
         id: 'bahrain',
