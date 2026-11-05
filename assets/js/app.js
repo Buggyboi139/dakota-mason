@@ -463,7 +463,7 @@
     let text = '<p>' + esc(p.description) + '</p>' + (p.detail ? '<p class="m-detail">' + esc(p.detail) + '</p>' : '');
     if (p.links && p.links.length) text += '<div class="m-links">' + p.links.map((l) => link(l.href, '<span>' + esc(l.label) + '</span>' + IC.out, 'link-line')).join('') + '</div>';
     if (p.note) text += '<p class="m-note">' + IC.lock + '<span>' + esc(p.note) + '</span></p>';
-    return '<details class="mrow" id="payload-' + p.id + '"' + (feat ? ' open' : '') + '>' +
+    return '<details class="mrow" id="payload-' + p.id + '">' +
       '<summary><span class="m-seq">' + noLabel(p) + '</span>' +
       '<span class="m-name">' + esc(p.name) + '</span>' +
       '<span class="m-meta"><span class="m-date">' + (p.started ? esc(month(p.started)) : '') + '</span><span class="m-class">' + esc(p.tag) + '</span>' +
