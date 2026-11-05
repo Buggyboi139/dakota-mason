@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" class="is-loading" data-time="day">
+<head>
+  <meta charset="utf-8">
+<meta name="robots" content="noindex">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Dakota Mason | City guide</title>
+  <meta name="description" content="Explore Dakota Mason's career in security as a small interactive city: Navy service, federal police work, security research, and projects.">
+  <meta name="theme-color" content="#efe5d3">
+  <link rel="icon" href="../../assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,400..900;1,400..700&family=Overpass+Mono:wght@400..700&display=swap">
+  <link rel="stylesheet" href="city.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+  <script src="../../assets/js/content.js"></script>
+  <script type="module" src="app.js"></script>
+  <script src="../switcher.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#dir-lines" id="skip">Skip to the directory</a>
+
+  <div class="sky" aria-hidden="true"><div class="sky__day"></div><div class="sky__night"></div></div>
+  <div class="stage" id="stage"></div>
+  <div class="pins" id="pins" aria-hidden="true"></div>
+
+  <header class="top" id="topbar">
+    <p class="top__id" aria-hidden="true"><b id="top-name"></b><span id="top-sub"></span></p>
+    <nav class="contact" id="contact" aria-label="Resume and contact"></nav>
+    <button class="daynight" id="daynight" type="button" role="switch" aria-checked="false" aria-label="Night mode">
+      <span class="daynight__opt daynight__opt--day" data-icon="sun"><span>Day</span></span>
+      <span class="daynight__opt daynight__opt--night" data-icon="moon"><span>Night</span></span>
+    </button>
+    <button class="dirbtn" id="dir-toggle" type="button" aria-expanded="false" aria-controls="directory" data-icon="menu"><span>Directory</span></button>
+  </header>
+
+  <aside class="side" id="side">
+    <section class="mast" id="mast" aria-label="About">
+      <div class="mast__body" id="mast-body"></div>
+      <button class="mast__fold" id="mast-fold" type="button" aria-expanded="true" aria-controls="mast-body" aria-label="Show or hide the summary"><span></span></button>
+    </section>
+    <nav class="dir" id="directory" aria-label="City directory">
+      <p class="dir__title"><span>Directory</span><span class="dir__hint">Every stop on the map</span></p>
+      <div class="dir__lines" id="dir-lines"></div>
+      <p class="dir__foot" id="dir-foot"></p>
+    </nav>
+  </aside>
+
+  <main class="main" id="main">
+    <aside class="card" id="card" aria-labelledby="card-title" hidden>
+      <button class="card__grip" id="card-grip" type="button" aria-label="Expand the card"><span></span></button>
+      <button class="card__close" id="card-close" type="button" aria-label="Close and return to the map" data-icon="close"></button>
+      <div class="card__scroll" id="card-scroll"></div>
+    </aside>
+    <div class="guide" id="guide" hidden></div>
+  </main>
+
+  <div class="mapctl" role="group" aria-label="Map controls">
+    <button type="button" data-map="in" data-icon="plus" aria-label="Zoom in" title="Zoom in"></button>
+    <button type="button" data-map="out" data-icon="minus" aria-label="Zoom out" title="Zoom out"></button>
+    <button type="button" data-map="left" data-icon="rotl" aria-label="Rotate left" title="Rotate left"></button>
+    <button type="button" data-map="right" data-icon="rotr" aria-label="Rotate right" title="Rotate right"></button>
+    <button type="button" data-map="home" data-icon="compass" aria-label="Reset the view" title="Reset the view"></button>
+  </div>
+  <p class="hint" id="hint" aria-hidden="true"></p>
+  <noscript><p class="noscript">Turn on JavaScript to explore this page.</p></noscript>
+</body>
+</html>

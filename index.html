@@ -4,478 +4,142 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dakota Mason | Cybersecurity Professional</title>
-<meta name="description" content="Dakota Mason: Navy veteran, former VA police officer, and security researcher with two CVEs. Security+ and A+ certified. Des Moines, Iowa.">
+<meta name="description" content="Navy veteran, former federal police officer, and security researcher with two CVEs. I find what's broken, document it clearly, and help get it fixed.">
+<link rel="canonical" href="https://dakota-mason.com/">
+<meta property="og:type" content="website">
 <meta property="og:title" content="Dakota Mason | Cybersecurity Professional">
-<meta property="og:description" content="Navy veteran, former VA police officer, and security researcher with two CVEs.">
+<meta property="og:description" content="Navy veteran, former federal police officer, and security researcher with two CVEs.">
 <meta property="og:image" content="https://dakota-mason.com/assets/img/avatar.jpg">
 <meta property="og:url" content="https://dakota-mason.com/">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#08090b">
 <link rel="icon" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#070b14;--bg2:#0c1322;--card:#101a2c;--card2:#14203a;--line:#1f2d4a;
-  --text:#e7edf7;--muted:#9aa8c1;--dim:#6b7a96;
-  --accent:#38e1c6;--accent2:#5b8cff;--gold:#f5c451;--maroon:#b3364f;
-  --radius:18px;--max:1180px;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-a{color:var(--accent);text-decoration:none}
-a:hover{text-decoration:underline}
-img{max-width:100%;display:block}
-.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
-.mono{font-family:"JetBrains Mono",monospace}
-
-/* Hero */
-.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line);
-  background:radial-gradient(900px 500px at 85% -10%,rgba(91,140,255,.22),transparent 60%),
-             radial-gradient(700px 420px at 0% 110%,rgba(56,225,198,.16),transparent 60%),var(--bg)}
-.hero::before{content:"";position:absolute;inset:0;opacity:.35;pointer-events:none;
-  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-  background-size:44px 44px;mask-image:radial-gradient(ellipse at 70% 30%,#000 10%,transparent 70%)}
-.hero .wrap{position:relative;display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;padding-top:72px;padding-bottom:64px}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;font:500 13px "JetBrains Mono",monospace;color:var(--accent);
-  background:rgba(56,225,198,.08);border:1px solid rgba(56,225,198,.25);padding:6px 12px;border-radius:999px}
-.eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent);animation:pulse 2s infinite}
-@keyframes pulse{50%{opacity:.35}}
-h1{font-size:clamp(40px,6vw,68px);line-height:1.04;margin:18px 0 12px;letter-spacing:-.03em;font-weight:800}
-h1 .grad{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-.lede{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:640px;margin:0 0 26px}
-.typed{color:var(--text);font-weight:600}
-.typed::after{content:"▍";color:var(--accent);margin-left:2px;animation:pulse 1s steps(1) infinite}
-.links{display:flex;flex-wrap:wrap;gap:10px}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 16px;border-radius:12px;font-weight:600;font-size:15px;
-  border:1px solid var(--line);background:var(--card);color:var(--text);transition:.2s}
-.btn:hover{text-decoration:none;border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 24px rgba(56,225,198,.12)}
-.btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#04121a;border:0}
-.btn svg{width:18px;height:18px;fill:currentColor}
-.portrait{position:relative;width:300px;aspect-ratio:1;border-radius:28px;padding:4px;
-  background:linear-gradient(135deg,var(--accent),var(--accent2),var(--maroon))}
-.portrait img{width:100%;height:100%;object-fit:cover;border-radius:24px}
-.portrait .badge{position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);white-space:nowrap;
-  background:var(--card2);border:1px solid var(--line);padding:6px 14px;border-radius:999px;font-size:13px;color:var(--muted)}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:44px}
-.stat{background:rgba(16,26,44,.7);border:1px solid var(--line);border-radius:14px;padding:16px 18px;backdrop-filter:blur(6px)}
-.stat b{display:block;font-size:28px;letter-spacing:-.02em}
-.stat span{color:var(--muted);font-size:14px}
-
-/* Tabs */
-.shell{display:grid;grid-template-columns:250px 1fr;gap:32px;padding:48px 20px 80px;max-width:var(--max);margin:0 auto}
-.tabs{position:sticky;top:20px;align-self:start;display:flex;flex-direction:column;gap:6px}
-.tabs .label{font:500 12px "JetBrains Mono",monospace;color:var(--dim);text-transform:uppercase;letter-spacing:.12em;margin:14px 10px 6px}
-.tab{all:unset;cursor:pointer;display:flex;flex-direction:column;padding:11px 14px;border-radius:12px;border:1px solid transparent;transition:.15s}
-.tab strong{font-size:15px;font-weight:600}
-.tab small{color:var(--dim);font-size:12.5px}
-.tab:hover{background:var(--bg2)}
-.tab[aria-selected="true"]{background:var(--card);border-color:var(--line);box-shadow:inset 3px 0 0 var(--accent)}
-.tab:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.panel{display:none;animation:fade .35s ease}
-.panel.active{display:block}
-@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-
-/* Panel content */
-.role{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:start}
-.role.wide{grid-template-columns:1fr}
-.kicker{font:500 13px "JetBrains Mono",monospace;color:var(--accent)}
-h2{font-size:clamp(28px,3.4vw,38px);line-height:1.15;margin:6px 0 10px;letter-spacing:-.02em}
-h3{font-size:18px;margin:28px 0 10px}
-.meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
-.pill{font-size:13px;color:var(--muted);background:var(--bg2);border:1px solid var(--line);padding:4px 10px;border-radius:999px}
-.pill.award{color:var(--gold);border-color:rgba(245,196,81,.35);background:rgba(245,196,81,.07)}
-p{margin:0 0 14px;color:#cdd6e6}
-ul.points{list-style:none;padding:0;margin:0}
-ul.points li{position:relative;padding:10px 0 10px 28px;border-bottom:1px dashed var(--line);color:#cdd6e6}
-ul.points li:last-child{border-bottom:0}
-ul.points li::before{content:"";position:absolute;left:4px;top:19px;width:10px;height:10px;border-radius:3px;
-  background:linear-gradient(135deg,var(--accent),var(--accent2))}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
-.chip{font:500 12.5px "JetBrains Mono",monospace;color:var(--text);background:var(--card2);border:1px solid var(--line);padding:5px 10px;border-radius:8px}
-.photo{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:var(--card)}
-.photo img{width:100%;height:auto;max-height:620px;object-fit:cover}
-.photo figcaption{font-size:13px;color:var(--muted);padding:10px 14px;border-top:1px solid var(--line)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
-.callout{background:linear-gradient(135deg,rgba(56,225,198,.08),rgba(91,140,255,.08));border:1px solid rgba(56,225,198,.25);
-  border-radius:var(--radius);padding:18px 20px;margin:18px 0}
-.callout b{color:var(--accent)}
-
-/* Grids */
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
-.proj{display:flex;flex-direction:column;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;transition:.2s}
-.proj:hover{border-color:rgba(56,225,198,.5);transform:translateY(-3px)}
-.proj h4{margin:0;font-size:17px}
-.proj p{font-size:14.5px;margin:0;color:var(--muted)}
-.proj .tag{font:500 11.5px "JetBrains Mono",monospace;color:var(--accent2);text-transform:uppercase;letter-spacing:.08em}
-.proj .go{margin-top:auto;font-size:14px;font-weight:600;display:flex;gap:14px;flex-wrap:wrap}
-.feature{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;margin:22px 0;display:flex;flex-direction:column;gap:10px}
-.feature h3{margin:4px 0 2px;font-size:24px}
-.feature .tag{font:500 11.5px "JetBrains Mono",monospace;color:var(--accent2);text-transform:uppercase;letter-spacing:.08em}
-.feature img{border-radius:12px;border:1px solid var(--line);aspect-ratio:16/8;object-fit:cover;width:100%}
-.feature .go{font-weight:600;display:flex;gap:16px;flex-wrap:wrap;margin-top:auto}
-.feature .muted{color:var(--muted);font-size:14.5px}
-.feature.tak{background:radial-gradient(600px 300px at 100% 0%,rgba(91,140,255,.18),transparent 60%),radial-gradient(500px 260px at 0% 100%,rgba(56,225,198,.12),transparent 60%),var(--card);border-color:rgba(56,225,198,.35)}
-.feature-pair{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.feature-pair .feature{margin:0}
-.bench{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:12px;margin:6px 0 8px}
-.bench-card{background:rgba(7,11,20,.55);border:1px solid var(--line);border-radius:14px;padding:16px}
-.bench-card b{display:block;font-size:30px;letter-spacing:-.02em;margin:4px 0;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-.bench-card span:last-child{color:var(--muted);font-size:14px}
-.bench-card strong{color:var(--text)}
-.hero-bench{border-color:rgba(56,225,198,.4)}
-.book{display:grid;grid-template-columns:260px 1fr;gap:28px;align-items:center}
-.book img{border-radius:10px;box-shadow:0 30px 60px rgba(0,0,0,.55),0 0 0 1px var(--line)}
-.timeline{position:relative;margin:8px 0 0;padding-left:22px;border-left:2px solid var(--line)}
-.timeline div{position:relative;margin:0 0 18px}
-.timeline div::before{content:"";position:absolute;left:-29px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
-.timeline b{display:block}
-.timeline span{color:var(--muted);font-size:14px}
-
-footer{border-top:1px solid var(--line);color:var(--dim);font-size:14px}
-footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:28px 20px}
-
-@media (max-width:900px){
-  .hero .wrap{grid-template-columns:1fr;padding-top:48px}
-  .portrait{width:200px;order:-1}
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .shell{grid-template-columns:1fr;padding-top:24px}
-  .tabs{position:sticky;top:0;z-index:5;flex-direction:row;overflow-x:auto;background:var(--bg);padding:10px 0;margin:0 -20px;padding-left:20px;border-bottom:1px solid var(--line)}
-  .tabs .label{display:none}
-  .tab{flex:0 0 auto}
-  .tab small{display:none}
-  .tab[aria-selected="true"]{box-shadow:inset 0 -3px 0 var(--accent)}
-  .role,.book,.feature-pair,.bench{grid-template-columns:1fr}
-}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Semi+Condensed:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/css/space.css">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
+<canvas id="sky" aria-hidden="true"></canvas>
 
-<header class="hero">
-  <div class="wrap">
-    <div>
-      <span class="eyebrow"><span class="dot"></span>Open to security roles · Des Moines, IA &amp; remote</span>
-      <h1>Dakota Mason<br><span class="grad">Security, end to end.</span></h1>
-      <p class="lede">Navy veteran, former federal police officer, and security researcher with two CVEs. I find what's broken, document it clearly, and help get it fixed. Currently focused on <span class="typed" id="typed">SOC analysis</span></p>
-      <div class="links">
-        <a class="btn primary" href="assets/Dakota-Mason-Resume.pdf" download>
-          <svg viewBox="0 0 24 24"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 2h14v2H5z"/></svg>Download resume</a>
-        <a class="btn" href="https://www.linkedin.com/in/dakota-mason" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.01 5 2.5 2.5 0 01.01-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C20.6 8.65 21 11.3 21 14.7V21h-4v-5.6c0-1.34-.03-3.06-1.86-3.06-1.87 0-2.15 1.46-2.15 2.96V21H9z"/></svg>LinkedIn</a>
-        <a class="btn" href="https://github.com/Buggyboi139" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M12 .5a11.5 11.5 0 00-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 015.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0012 .5z"/></svg>GitHub</a>
-        <a class="btn" href="https://huggingface.co/ByteOtter" target="_blank" rel="noopener">🤗 Hugging Face</a>
-        <a class="btn" href="https://www.amazon.com/dp/B0F1W249XN" target="_blank" rel="noopener">📖 My book</a>
-        <a class="btn" href="mailto:dsmason321@gmail.com">✉ Email</a>
-      </div>
-    </div>
-    <div class="portrait">
-      <img src="assets/img/avatar.jpg" alt="Dakota Mason in a navy suit">
-      <span class="badge">U.S. Navy veteran · 2015–2023</span>
-    </div>
-  </div>
-  <div class="wrap" style="padding-bottom:56px;margin-top:-28px">
-    <div class="stats">
-      <div class="stat"><b>2 CVEs</b><span>from authorized bug bounty research</span></div>
-      <div class="stat"><b>8 years</b><span>U.S. Navy &amp; Navy Reserve</span></div>
-      <div class="stat"><b>$6B+</b><span>in installation assets secured</span></div>
-      <div class="stat"><b>2× NAM</b><span>Navy &amp; Marine Corps Achievement Medals</span></div>
-    </div>
-  </div>
+<header class="bar" id="bar">
+  <a class="brand" href="#top">
+    <svg class="insignia" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="12" r="10.5" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <ellipse cx="12" cy="12" rx="10.5" ry="4" transform="rotate(-24 12 12)" fill="none" stroke="currentColor" stroke-width=".9" opacity=".6"/>
+      <circle cx="21.1" cy="8" r="1.9" fill="#fc3d21"/>
+    </svg>
+    <span class="brand-name" data-text="name"></span>
+    <span class="brand-sub">Mission archive</span>
+  </a>
+  <nav class="nav" id="site-nav" aria-label="Sections">
+    <a href="#missions" data-sec="missions">Missions</a>
+    <a href="#ai" data-sec="ai">Local AI</a>
+    <a href="#projects" data-sec="projects">Payloads</a>
+    <a href="#awards" data-sec="awards">Awards</a>
+    <a href="#education" data-sec="education">Training</a>
+    <a href="#book" data-sec="book">Archive</a>
+    <a href="#comms" data-sec="comms">Comms</a>
+  </nav>
+  <a class="bar-resume" data-link="resume"><span class="bar-resume-label">Resume</span><span class="bar-resume-ext">PDF</span></a>
+  <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><span class="menu-lines" aria-hidden="true"></span><span class="menu-label">Menu</span></button>
 </header>
 
-<main class="shell">
-  <nav class="tabs" role="tablist" aria-label="Experience">
-    <span class="label">Experience</span>
-    <button class="tab" role="tab" id="t-research" aria-controls="research"><strong>Security Researcher</strong><small>2024 – present</small></button>
-    <button class="tab" role="tab" id="t-va" aria-controls="va"><strong>VA Police</strong><small>2022 – 2024</small></button>
-    <button class="tab" role="tab" id="t-bahrain" aria-controls="bahrain"><strong>Bahrain Deployment</strong><small>2019 – 2021</small></button>
-    <button class="tab" role="tab" id="t-djibouti" aria-controls="djibouti"><strong>Djibouti Deployment</strong><small>2018 – 2019</small></button>
-    <button class="tab" role="tab" id="t-navy" aria-controls="navy"><strong>Navy &amp; Reserve</strong><small>2015 – 2023</small></button>
-    <span class="label">More</span>
-    <button class="tab" role="tab" id="t-projects" aria-controls="projects"><strong>Projects</strong><small>Code, models, sites</small></button>
-    <button class="tab" role="tab" id="t-education" aria-controls="education"><strong>Education &amp; Certs</strong><small>B.S. · Security+ · A+</small></button>
-    <button class="tab" role="tab" id="t-book" aria-controls="book"><strong>Author</strong><small>Published novel</small></button>
-  </nav>
-
-  <div>
-    <!-- Security research -->
-    <section class="panel" id="research" role="tabpanel" aria-labelledby="t-research">
-      <div class="role">
-        <div>
-          <span class="kicker">June 2024 – Present · Des Moines, IA</span>
-          <h2>Independent Security Researcher</h2>
-          <div class="meta"><span class="pill">Self-employed</span><span class="pill">Bugcrowd</span><span class="pill">HackerOne</span><span class="pill award">2 CVEs assigned</span></div>
-          <p>After leaving the VA, I went all in on cybersecurity: full-time study for my B.S. alongside authorized bug bounty work on Bugcrowd and HackerOne. I test web applications inside each program's published scope, looking for the places where an application trusts the wrong person.</p>
-          <div class="callout"><b>Two CVEs.</b> I found two broken-access-control (IDOR) vulnerabilities that were assigned CVEs. My write-ups documented reproduction steps and impact clearly enough for the vendors to fix them, and both findings paid bounties.</div>
-          <h3>What the work looks like</h3>
-          <ul class="points">
-            <li>Reconnaissance, manual web application testing, and authorization-boundary testing within each program's scope.</li>
-            <li>Investigating cross-site scripting (XSS) and server-side request forgery (SSRF) findings, with reports that describe impact and repeatable steps.</li>
-            <li>Building Burp Cockpit, a Burp Suite extension that adds AI-assisted analysis to web security testing.</li>
-            <li>Running a Linux home lab: building and troubleshooting systems, and evaluating local AI models.</li>
-            <li>Building TAK, a Rust and C++ model-quantization tool whose published models beat a leading quantizer at the same file size (see Projects).</li>
-          </ul>
-          <h3>Tools</h3>
-          <div class="chips"><span class="chip">Burp Suite</span><span class="chip">Nmap</span><span class="chip">Nessus</span><span class="chip">Greenbone</span><span class="chip">AWS</span><span class="chip">Linux</span><span class="chip">Python</span><span class="chip">Git</span><span class="chip">Rust</span><span class="chip">C++</span></div>
-        </div>
-        <figure class="photo" style="margin:0">
-          <img src="assets/img/headshot.jpg" alt="Dakota Mason">
-          <figcaption>Former Navy Secret clearance · CompTIA Security+ and A+</figcaption>
-        </figure>
-      </div>
+<main id="main" tabindex="-1">
+  <noscript>
+    <section class="sec">
+      <h1 class="sec-title">Dakota Mason</h1>
+      <p>Cybersecurity Professional. Navy veteran, former federal police officer, and security researcher with two CVEs. Open to security roles in Des Moines, IA and remote.</p>
+      <p><a href="assets/Dakota-Mason-Resume.pdf">Download resume (PDF)</a> · <a href="https://www.linkedin.com/in/dakota-mason">LinkedIn</a> · <a href="https://github.com/Buggyboi139">GitHub</a> · <a href="https://huggingface.co/ByteOtter">Hugging Face</a> · <a href="mailto:dsmason321@gmail.com">Email</a></p>
     </section>
+  </noscript>
+  <section class="hero" id="top" aria-labelledby="hero-name">
+    <div class="hero-id" id="hero-id"></div>
+    <div class="hero-plot" id="hero-plot">
+      <div class="plot" id="plot"></div>
+      <div class="readout" id="readout" aria-hidden="true"></div>
+      <ol class="flightlog" id="flightlog" aria-label="Career milestones"></ol>
+    </div>
+    <div class="telemetry" id="telemetry"></div>
+  </section>
 
-    <!-- VA -->
-    <section class="panel" id="va" role="tabpanel" aria-labelledby="t-va">
-      <div class="role">
-        <div>
-          <span class="kicker">September 2022 – June 2024 · Des Moines, IA</span>
-          <h2>Senior Police Officer, GS-0083-07</h2>
-          <div class="meta"><span class="pill">Department of Veterans Affairs</span><span class="pill">Veterans Health Administration</span><span class="pill">Federal law enforcement</span></div>
-          <p>As a federal police officer at the Des Moines VA medical center, I protected veterans, staff, and the sensitive information a hospital runs on. The job was part patrol, part investigator, and part access-control gatekeeper, and every part of it ran on careful documentation.</p>
-          <h3>Investigations</h3>
-          <ul class="points">
-            <li>Led investigations from complaint review through fact-finding, interviews, evidence handling, and reports for legal or administrative review.</li>
-            <li>Handled cases involving government laptops and more than $50,000 in government property.</li>
-            <li>Investigated online abuse, harassment, and misuse of government property; interviewed subjects, victims, and witnesses and weighed conflicting accounts to reach supported findings.</li>
-          </ul>
-          <h3>Protection and response</h3>
-          <ul class="points">
-            <li>Enforced access controls and identity verification in restricted areas of the medical center.</li>
-            <li>Safeguarded PII and PHI under VA privacy requirements.</li>
-            <li>Responded to high-risk incidents, made arrests, and coordinated with federal, state, and local agencies.</li>
-          </ul>
-          <h3>Why it matters for security</h3>
-          <p>Incident response, chain of custody, insider-threat awareness, and writing findings that hold up to review: the same habits a SOC depends on.</p>
-        </div>
-        <figure class="photo" style="margin:0">
-          <img src="assets/img/va.jpg" alt="Dakota Mason in VA police uniform" loading="lazy">
-          <figcaption>On duty at the VA, 2024</figcaption>
-        </figure>
-      </div>
-    </section>
+  <section class="sec missions" id="missions" aria-labelledby="missions-title">
+    <header class="sec-head">
+      <p class="sec-index"><span class="sec-no">01</span><span class="sec-kicker">Experience</span></p>
+      <h2 class="sec-title" id="missions-title">Missions</h2>
+      <p class="sec-sub" id="missions-sub"></p>
+    </header>
+    <div class="patches" id="patches" role="tablist" aria-label="Missions"></div>
+    <div class="dossiers" id="dossiers"></div>
+  </section>
 
-    <!-- Bahrain -->
-    <section class="panel" id="bahrain" role="tabpanel" aria-labelledby="t-bahrain">
-      <div class="role">
-        <div>
-          <span class="kicker">December 2019 – April 2021 · Isa Air Base, Bahrain</span>
-          <h2>Physical Security &amp; Intelligence Specialist</h2>
-          <div class="meta"><span class="pill">U.S. Navy</span><span class="pill">MA2 (E-5)</span><span class="pill">Deployment</span><span class="pill award">Navy &amp; Marine Corps Achievement Medal</span></div>
-          <p>In Bahrain I owned physical-security responsibility for an installation holding more than $6 billion in assets. The work was risk management in the real world: find the gaps before someone else does, prioritize them, and brief leadership on what to fix first.</p>
-          <h3>Assessment and risk</h3>
-          <ul class="points">
-            <li>Conducted vulnerability assessments, security audits, and risk analysis for installation assets valued at more than $6 billion.</li>
-            <li>Prepared intelligence and security briefings for senior installation leadership, turning incoming threat information into concise, actionable priorities.</li>
-            <li>Handled classified information.</li>
-          </ul>
-          <h3>Leading projects and people</h3>
-          <ul class="points">
-            <li>Managed security infrastructure, lock, and key-control projects from planning through completion.</li>
-            <li>Trained more than 150 personnel.</li>
-            <li>Received a Navy and Marine Corps Achievement Medal.</li>
-          </ul>
-        </div>
-        <figure class="photo" style="margin:0">
-          <img src="assets/img/bahrain.jpg" alt="Dakota Mason in uniform in Bahrain" loading="lazy">
-          <figcaption>Isa Air Base, Bahrain, November 2020</figcaption>
-        </figure>
+  <section class="sec lab" id="ai" aria-labelledby="ai-title">
+    <header class="sec-head lab-head">
+      <p class="sec-index"><span class="sec-no">02</span><span class="sec-kicker">Program</span></p>
+      <div class="lab-title">
+        <h2 class="sec-title" id="ai-title"></h2>
+        <p class="sec-sub" id="ai-sub"></p>
       </div>
-    </section>
+      <div class="lab-lede" id="ai-lede"></div>
+    </header>
+    <article class="tak" id="tak" aria-labelledby="tak-title"></article>
+    <div class="lab-bay" id="lab-bay"></div>
+  </section>
 
-    <!-- Djibouti -->
-    <section class="panel" id="djibouti" role="tabpanel" aria-labelledby="t-djibouti">
-      <div class="role wide">
-        <figure class="photo" style="margin:0 0 24px">
-          <img src="assets/img/djibouti.jpg" alt="Dakota Mason in uniform in the Djibouti desert with camels" loading="lazy" style="max-height:460px">
-          <figcaption>Djibouti, May 2019</figcaption>
-        </figure>
-        <div>
-          <span class="kicker">August 2018 – October 2019 · Camp Lemonnier, Djibouti</span>
-          <h2>Patrol Supervisor &amp; Master-at-Arms</h2>
-          <div class="meta"><span class="pill">U.S. Navy</span><span class="pill">MA3 (E-4)</span><span class="pill">Combat deployment</span><span class="pill award">Navy &amp; Marine Corps Achievement Medal</span></div>
-          <p>Camp Lemonnier is a forward-deployed joint installation in the Horn of Africa. I supervised the patrol and access-control operations that kept it secure, and led sailors in an environment where the threat was real.</p>
-          <ul class="points">
-            <li>Supervised personnel in patrol and access-control operations at a forward-deployed joint installation.</li>
-            <li>Served as incident commander during an emergency response.</li>
-            <li>Received a Navy and Marine Corps Achievement Medal.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+  <section class="sec payloads" id="projects" aria-labelledby="projects-title">
+    <header class="sec-head">
+      <p class="sec-index"><span class="sec-no">03</span><span class="sec-kicker">Projects</span></p>
+      <h2 class="sec-title" id="projects-title">Launch manifest</h2>
+      <p class="sec-sub" id="projects-sub"></p>
+    </header>
+    <figure class="cadence" id="cadence"></figure>
+    <div class="manifest" id="manifest"></div>
+  </section>
 
-    <!-- Navy -->
-    <section class="panel" id="navy" role="tabpanel" aria-labelledby="t-navy">
-      <div class="role">
-        <div>
-          <span class="kicker">September 2015 – September 2023</span>
-          <h2>Master-at-Arms, U.S. Navy &amp; Navy Reserve</h2>
-          <div class="meta"><span class="pill">Force protection</span><span class="pill">Former Secret clearance</span><span class="pill">Honorable service</span></div>
-          <p>Master-at-Arms is the Navy's security and law enforcement rating. Eight years in it, active and reserve, built the foundation everything else stands on: protect people and assets, control who gets in, and watch for threats from the inside as well as the outside.</p>
-          <ul class="points">
-            <li>Force protection, access control, and physical security across multiple operational facilities.</li>
-            <li>Insider-threat protocols and enforcement.</li>
-            <li>Reserve service in Des Moines through September 2023.</li>
-          </ul>
-          <h3>Service timeline</h3>
-          <div class="timeline">
-            <div><b>2015</b><span>Enlisted as a Master-at-Arms</span></div>
-            <div><b>2018 – 2019</b><span>Camp Lemonnier, Djibouti · MA3</span></div>
-            <div><b>2019 – 2021</b><span>Isa Air Base, Bahrain · MA2</span></div>
-            <div><b>2021 – 2023</b><span>Navy Reserve, Des Moines</span></div>
-          </div>
-        </div>
-        <figure class="photo" style="margin:0">
-          <img src="assets/img/navy.jpg" alt="Dakota Mason in Navy khaki uniform, 2015" loading="lazy">
-          <figcaption>Early in my Navy career, 2015</figcaption>
-        </figure>
-      </div>
-    </section>
+  <section class="sec awards" id="awards" aria-labelledby="awards-title">
+    <header class="sec-head">
+      <p class="sec-index"><span class="sec-no">04</span><span class="sec-kicker">Awards</span></p>
+      <h2 class="sec-title" id="awards-title">Commendations</h2>
+      <p class="sec-sub" id="awards-sub"></p>
+    </header>
+    <div class="aw-body" id="aw-body"></div>
+  </section>
 
-    <!-- Projects -->
-    <section class="panel" id="projects" role="tabpanel" aria-labelledby="t-projects">
-      <span class="kicker">Things I've built</span>
-      <h2>Projects</h2>
-      <p>AI model research, production web apps, and security tooling I designed, built, and shipped.</p>
+  <section class="sec training" id="education" aria-labelledby="education-title">
+    <header class="sec-head">
+      <p class="sec-index"><span class="sec-no">05</span><span class="sec-kicker">Education</span></p>
+      <h2 class="sec-title" id="education-title">Training and certification</h2>
+    </header>
+    <div class="training-body" id="training"></div>
+  </section>
 
-      <article class="feature tak">
-        <div class="feature-head">
-          <span class="tag">Flagship · Rust · C++ · CUDA</span>
-          <h3>TAK: task-aware model quantization</h3>
-          <p>TAK shrinks large language models to a fixed file size while protecting the skill you care about. Instead of compressing every tensor the same way, it measures how each precision change affects a target task, solves for the best allocation under an exact byte budget, and exports a standard GGUF that runs anywhere llama.cpp does. No fine-tuning, no model merging: only smarter precision.</p>
-        </div>
-        <div class="bench">
-          <div class="bench-card hero-bench">
-            <span class="kicker">Qwen3.8-27B · reasoning</span>
-            <b>82.81 vs 77.34</b>
-            <span>TAK beat Unsloth's UD-IQ2_S by <strong>+5.47 points</strong> at the identical 8.37 GB file size, landing within 0.78 points of the 54.7 GB original: <strong>85% smaller</strong> for nearly the same reasoning.</span>
-          </div>
-          <div class="bench-card">
-            <span class="kicker">Gemma 4 E4B · reasoning</span>
-            <b>+14.06</b>
-            <span>points over Unsloth UD-IQ2_M, with a 9% smaller file</span>
-          </div>
-          <div class="bench-card">
-            <span class="kicker">Qwen3.5-4B · reasoning</span>
-            <b>+11.72</b>
-            <span>points over Unsloth UD-IQ2_M at the same size</span>
-          </div>
-        </div>
-        <ul class="points">
-          <li>Every score comes from the same frozen 960-item evaluation pack, run to completion with zero failed items. The headline is the run's target category; the other suites are diagnostics.</li>
-          <li>Rust application with a C++ worker on a pinned llama.cpp runtime. Runs on Vulkan or CUDA, with resumable, checkpointed jobs and a headless GPU deployment for models too large for a workstation.</li>
-          <li>Measures real tensor-format changes against the task's own grader, including executed-test grading for coding, and records signed effects of each change, alone and in pairs.</li>
-          <li>Published winners on Hugging Face as the TAK Reasoning Champions collection.</li>
-        </ul>
-        <div class="go"><a href="https://huggingface.co/collections/ByteOtter/tak-reasoning-champions-6a9f09c206557492a82905f3" target="_blank" rel="noopener">TAK Reasoning Champions →</a><a href="https://huggingface.co/ByteOtter" target="_blank" rel="noopener">All models →</a><span style="color:var(--dim)">Source is private</span></div>
-      </article>
+  <section class="sec archive" id="book" aria-labelledby="book-title">
+    <header class="sec-head">
+      <p class="sec-index"><span class="sec-no">06</span><span class="sec-kicker">Book</span></p>
+      <h2 class="sec-title" id="book-title">Archive record</h2>
+    </header>
+    <div class="rec" id="record"></div>
+  </section>
 
-      <div class="feature-pair">
-        <article class="feature">
-          <img src="assets/img/ironmargins.jpg" alt="Iron Margins home page" loading="lazy">
-          <span class="tag">SaaS · PWA · Supabase</span>
-          <h3>Iron Margins</h3>
-          <p>Estimating, bidding, and invoicing software for contractors. It standardizes material costs, calculates true labor burden, including payroll taxes and workers' comp, and generates client-ready PDF proposals in minutes. Built as an offline-capable progressive web app.</p>
-          <p class="muted">Designed with a written threat model covering client-side trust, authorization bypass, and service-worker hijacking, with server-side validation and a strict Content Security Policy as mitigations.</p>
-          <div class="go"><a href="https://ironmargins.com" target="_blank" rel="noopener">ironmargins.com →</a><a href="https://github.com/Buggyboi139/ironmargins" target="_blank" rel="noopener">GitHub →</a></div>
-        </article>
-        <article class="feature">
-          <img src="assets/img/pearltide.jpg" alt="Pearl Tide game art" loading="lazy">
-          <span class="tag">Mobile game · Three.js · Capacitor</span>
-          <h3>Pearl Tide</h3>
-          <p>A cozy 3D mermaid game for iPhone and Android. Players swim a reef, a kelp forest, and crystal caverns, help the sea creatures they meet, and decorate a home in a sunken ship across a four-chapter story.</p>
-          <p class="muted">Built in Three.js and wrapped for iOS and Android with Capacitor, with touch and desktop controls and adjustable graphics levels for phones.</p>
-          <div class="go"><a href="https://pearltide.world/" target="_blank" rel="noopener">pearltide.world →</a></div>
-        </article>
-      </div>
-
-      <h3>More projects</h3>
-      <div class="grid">
-        <div class="proj"><span class="tag">Security tooling</span><h4>Burp Cockpit</h4><p>A Burp Suite extension that adds AI-assisted analysis to web security testing.</p><div class="go"><span style="color:var(--dim)">Private repo</span></div></div>
-        <div class="proj"><span class="tag">Python</span><h4>Glass Skull</h4><p>A local Streamlit cockpit for running GGUF models through llama.cpp and visualizing model activity.</p><div class="go"><a href="https://github.com/Buggyboi139/glass-skull" target="_blank" rel="noopener">GitHub →</a></div></div>
-        <div class="proj"><span class="tag">Python</span><h4>smol-llm</h4><p>A tiny GPT-style language model built from scratch for testing tokenizers, data quality, and training behavior.</p><div class="go"><a href="https://github.com/Buggyboi139/smol-llm" target="_blank" rel="noopener">GitHub →</a></div></div>
-        <div class="proj"><span class="tag">JavaScript</span><h4>LlamaCalc</h4><p>A static command workbench that builds llama-cli and llama-server commands in the browser.</p><div class="go"><a href="https://llamabuilding.com/" target="_blank" rel="noopener">Live site →</a><a href="https://github.com/Buggyboi139/llamacalc" target="_blank" rel="noopener">GitHub →</a></div></div>
-        <div class="proj"><span class="tag">Game · PWA</span><h4>Hostile Volume</h4><p>A browser game with client-side state management and audio rendering.</p><div class="go"><a href="https://hostilevolume.com" target="_blank" rel="noopener">Play →</a><a href="https://github.com/Buggyboi139/hostilevolume" target="_blank" rel="noopener">GitHub →</a></div></div>
-      </div>
-    </section>
-
-    <!-- Education -->
-    <section class="panel" id="education" role="tabpanel" aria-labelledby="t-education">
-      <span class="kicker">Education &amp; certifications</span>
-      <h2>B.S., Cybersecurity Technology</h2>
-      <div class="meta"><span class="pill">University of Maryland Global Campus</span><span class="pill">120 credits</span><span class="pill">GPA 3.25</span></div>
-      <p>All degree requirements completed in October 2026; conferral December 30, 2026.</p>
-      <div class="grid" style="margin-top:18px">
-        <div class="card"><span class="kicker">Certification</span><h3 style="margin:6px 0 4px">CompTIA Security+</h3><p style="margin:0;color:var(--muted)">Earned April 2025</p></div>
-        <div class="card"><span class="kicker">Certification</span><h3 style="margin:6px 0 4px">CompTIA A+</h3><p style="margin:0;color:var(--muted)">Earned April 2025</p></div>
-      </div>
-      <h3>Relevant coursework</h3>
-      <div class="chips">
-        <span class="chip">Ethical Hacking</span><span class="chip">Penetration Testing &amp; Cyber Red Team</span><span class="chip">Threat Management &amp; Vulnerability Assessment</span>
-        <span class="chip">Cloud Technologies</span><span class="chip">Red Hat Linux System Administration</span><span class="chip">Switching, Routing &amp; Wireless</span>
-      </div>
-      <h3>Skills</h3>
-      <div class="chips">
-        <span class="chip">Vulnerability assessment</span><span class="chip">Web app testing</span><span class="chip">Access control testing</span><span class="chip">Incident response</span>
-        <span class="chip">Investigations</span><span class="chip">Risk analysis</span><span class="chip">PII/PHI safeguarding</span><span class="chip">TCP/IP</span>
-        <span class="chip">Linux</span><span class="chip">Windows</span><span class="chip">SIEM monitoring</span><span class="chip">SQL fundamentals</span>
-      </div>
-    </section>
-
-    <!-- Book -->
-    <section class="panel" id="book" role="tabpanel" aria-labelledby="t-book">
-      <div class="book">
-        <a href="https://www.amazon.com/dp/B0F1W249XN" target="_blank" rel="noopener"><img src="assets/img/book-cover.jpg" alt="Cover of Redemption of the Fallen God" loading="lazy"></a>
-        <div>
-          <span class="kicker">Published author</span>
-          <h2>Redemption of the Fallen God</h2>
-          <p style="color:var(--muted);font-style:italic">A God's Fall, A Mortal's Fate</p>
-          <p>I wrote and self-published a fantasy novel, available in paperback and Kindle. Taking a book from draft through editing, cover, and publication on Amazon KDP took the same persistence as any long project: ship it, measure it, and keep improving it.</p>
-          <a class="btn primary" href="https://www.amazon.com/dp/B0F1W249XN" target="_blank" rel="noopener">View on Amazon →</a>
-        </div>
-      </div>
-    </section>
-  </div>
+  <section class="sec comms" id="comms" aria-labelledby="comms-title">
+    <header class="sec-head">
+      <p class="sec-index"><span class="sec-no">07</span><span class="sec-kicker">Contact</span></p>
+      <h2 class="sec-title" id="comms-title">Comms</h2>
+    </header>
+    <div class="comms-body" id="comms-body"></div>
+  </section>
 </main>
 
-<footer>
-  <div class="wrap">
-    <span>© 2026 Dakota Mason · Des Moines, Iowa</span>
-    <span><a href="https://www.linkedin.com/in/dakota-mason">LinkedIn</a> · <a href="https://github.com/Buggyboi139">GitHub</a> · <a href="mailto:dsmason321@gmail.com">dsmason321@gmail.com</a></span>
-  </div>
-</footer>
+<footer class="foot" id="foot"></footer>
 
-<script>
-(function(){
-  const tabs=[...document.querySelectorAll('.tab')];
-  const panels=[...document.querySelectorAll('.panel')];
-  function show(id,push){
-    if(!document.getElementById(id)) id='research';
-    tabs.forEach(t=>{const on=t.getAttribute('aria-controls')===id;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1});
-    panels.forEach(p=>p.classList.toggle('active',p.id===id));
-    if(push) history.replaceState(null,'','#'+id);
-  }
-  tabs.forEach((t,i)=>{
-    t.addEventListener('click',()=>{show(t.getAttribute('aria-controls'),true);
-      if(innerWidth<=900) document.querySelector('.shell').scrollIntoView({behavior:'smooth'});});
-    t.addEventListener('keydown',e=>{
-      const d={ArrowDown:1,ArrowRight:1,ArrowUp:-1,ArrowLeft:-1}[e.key];
-      if(d){e.preventDefault();const n=tabs[(i+d+tabs.length)%tabs.length];n.focus();n.click();}
-    });
-  });
-  show(location.hash.slice(1),false);
-  addEventListener('hashchange',()=>show(location.hash.slice(1),false));
-
-  // Rotating focus areas in the hero
-  const words=['SOC analysis','vulnerability assessment','incident response','application security'];
-  const el=document.getElementById('typed');let w=0;
-  if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
-    setInterval(()=>{w=(w+1)%words.length;let s=words[w],k=0;el.textContent='';
-      const iv=setInterval(()=>{el.textContent=s.slice(0,++k);if(k>=s.length)clearInterval(iv)},45)},3200);
-  }
-})();
-</script>
+<script src="assets/js/content.js"></script>
+<script src="assets/js/ribbons.js"></script>
+<script src="assets/js/starfield.js"></script>
+<script src="assets/js/stardust.js"></script>
+<script src="assets/js/patches.js"></script>
+<script src="assets/js/charts.js"></script>
+<script src="assets/js/app.js"></script>
 </body>
 </html>

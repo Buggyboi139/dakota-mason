@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dakota Mason | Redesigns</title>
+<meta name="description" content="Four design directions for dakota-mason.com.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="../assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f3f1ec;--ink:#17161a;--muted:#5d5a63;--line:#d9d5cc;--card:#fbfaf7}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 "Hanken Grotesk",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:56px 24px 72px}
+header{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px 40px;border-bottom:1px solid var(--line);padding-bottom:28px;margin-bottom:36px}
+h1{font:400 clamp(40px,6vw,72px)/1 "Instrument Serif",serif;letter-spacing:-.01em;margin:0}
+h1 em{font-style:italic}
+header p{margin:0;max-width:440px;color:var(--muted)}
+header a{font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 28px;list-style:none;margin:0;padding:0}
+.grid a{display:block;text-decoration:none}
+.shot{aspect-ratio:16/10;background:var(--card);border:1px solid var(--line);overflow:hidden}
+.shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.grid a:hover img,.grid a:focus-visible img{transform:scale(1.03)}
+.grid a:focus-visible{outline:2px solid var(--ink);outline-offset:6px}
+.meta{display:flex;gap:12px;align-items:baseline;margin-top:14px}
+.num{font:500 13px/1 "Hanken Grotesk",sans-serif;font-variant-numeric:tabular-nums;color:var(--muted)}
+h2{font:400 30px/1.1 "Instrument Serif",serif;margin:0}
+.grid p{margin:6px 0 0 30px;color:var(--muted);font-size:15px}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+@media (max-width:420px){.wrap{padding:40px 16px 56px}}
+@media (prefers-reduced-motion:reduce){.shot img{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Four directions for <em>dakota-mason.com</em></h1>
+    <p>Same content in each one, from a single source. Space is the live design; Watch, City, and Pastel are shelved drafts. <a href="../">See the live site</a>.</p>
+  </header>
+  <ul class="grid" id="grid"></ul>
+  <footer>Drafts for review. Not linked from the live site.</footer>
+</div>
+<script>
+const designs = [
+  ['space', 'Space', 'Live now. A mission archive: trajectory plot, mission patches, and a star cursor that leaves stardust.', '../'],
+  ['watch', 'Watch Face', 'A dive watch with a career bezel and a side roller that steps through projects in order.'],
+  ['city', 'City', 'A low-poly 3D city. Each building is a chapter; fly to it to read.'],
+  ['pastel', 'Pastel', 'Soft pastels on toothy paper, drawn by 3D pastel sticks that leave caked pigment behind.'],
+];
+document.getElementById('grid').innerHTML = designs.map(([slug, name, blurb, href], i) => `
+  <li><a href="${href || slug + '/'}">
+    <div class="shot"><img src="thumbs/${slug}.jpg" alt="Screenshot of the ${name} design" loading="lazy" width="720" height="450"></div>
+    <div class="meta"><span class="num">0${i + 1}</span><h2>${name}</h2></div>
+    <p>${blurb}</p>
+  </a></li>`).join('');
+</script>
+</body>
+</html>
