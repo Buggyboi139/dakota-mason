@@ -251,21 +251,18 @@
   });
 
   // ------------------------------------------------------------------ Local AI program (TAK leads)
+  // The program is its own launch manifest: every project gets the same row, in program order.
+  // TAK leads with the flagship mark, and its row opens to the score readout.
   const AI = S.localAI;
   const T = S.tak, Hd = T.headline;
   const launchNo = new Map(S.projectTimeline.map((id, i) => [id, i + 1]));
-  const launchMeta = (p) => (launchNo.has(p.id) ? '<span>Launch ' + pad(launchNo.get(p.id)) + '</span>' : '') +
-    (p.started ? '<span>Started ' + esc(month(p.started)) + '</span>' : '');
   const anchorFor = (id) => (id === T.id ? T.id : 'payload-' + id);
 
   $('#ai-title').textContent = AI.title;
   $('#ai-sub').textContent = AI.kicker;
-  $('#ai-lede').innerHTML =
-    '<p class="lab-intro">' + esc(AI.intro) + '</p>' +
-    '<nav class="roster" aria-label="' + esc(AI.title) + ' projects"><span class="lbl">On board</span><ul>' +
-    [T].concat(AI.projects).map((p) => '<li><a href="#' + anchorFor(p.id) + '">' + esc(p.name) + '</a></li>').join('') + '</ul></nav>';
+  $('#ai-lede').innerHTML = '<p class="lab-intro">' + esc(AI.intro) + '</p>';
 
-  // TAK: the flagship mission.
+  // TAK's readout: the headline score line, then the benchmark channels in a row.
   const source = Math.round((Hd.tak + Hd.gapToSource) * 100) / 100;
   const lo = Math.floor(Hd.baseline) - 1, hi = Math.ceil(source) + 1;
   const X = (v) => ((v - lo) / (hi - lo)) * 100;
@@ -280,33 +277,9 @@
     '<span class="sc-stem"></span><span class="sc-dot"></span>' +
     '<span class="sc-label"><span class="sc-val">' + val + '</span><span class="sc-name">' + name +
     '<span class="sc-size">' + size + '</span></span></span></div>';
-  const tSize = parseFloat(Hd.size), sSize = parseFloat(Hd.sourceSize);
-  const unit = (String(Hd.size).match(/[A-Za-z]+/) || [''])[0];
-  const sizeMax = Math.ceil(sSize / 10) * 10;
-  let sizeAxis = '';
-  for (let v = 0; v <= sizeMax; v += 10) sizeAxis += '<span style="left:' + (v / sizeMax * 100).toFixed(2) + '%">' + v + (v === sizeMax ? ' ' + esc(unit) : '') + '</span>';
-  const sizeRow = (cls, name, v, label) => {
-    const w = v / sizeMax * 100;
-    return '<div class="sz-row ' + cls + '"><span class="sz-name lbl">' + name + '</span><div class="sz-track" style="--w:' + w.toFixed(2) + '%">' +
-      '<div class="sz-bar"></div><span class="sz-val' + (w > 70 ? ' in' : '') + '">' + esc(label) + '</span></div></div>';
-  };
   const dmax = Math.ceil(Math.max.apply(null, T.benchmarks.map((b) => b.delta)) / 5) * 5;
-  const hf = AI.huggingface;
-  const takLinks = T.links.filter((l) => !hf || l.href !== hf.href);
-  const numbered = (list, cls) => '<ol class="' + cls + '">' + list.map((p, i) => '<li><span class="mono">' + pad(i + 1) + '</span><span>' + esc(p) + '</span></li>').join('') + '</ol>';
-
-  $('#tak').innerHTML =
-    '<header class="tak-head">' +
-    '<p class="sec-index sub-index"><span class="sec-no">02.1</span><span>Flagship mission</span><span class="tak-launch">' + launchMeta(T) + '</span></p>' +
-    '<div class="tak-id"><p class="lbl tak-kicker">Deep-space probe</p>' +
-    '<h3 class="tak-name" id="tak-title">' + esc(T.name) + '</h3>' +
-    '<p class="tak-sub">' + esc(T.subtitle) + '</p>' +
-    '<p class="tak-tag">' + esc(T.tag) + '</p></div>' +
-    '<div class="tak-desc"><p>' + esc(T.description) + '</p>' +
-    '<ul class="tak-stack" aria-label="Stack">' + T.stack.map((s) => '<li>' + esc(s) + '</li>').join('') + '</ul></div>' +
-    '</header>' +
+  const readout =
     '<div class="tak-panel">' +
-    // Instrument 01: the headline score line.
     '<section class="inst" aria-labelledby="inst-1">' +
     '<header class="inst-head"><span class="mono">Instrument 01</span><h4 id="inst-1">' + esc(Hd.model) + ' · ' + esc(Hd.task) + ' score</h4>' +
     '<span class="inst-meta">' + esc(Hd.size) + ' file</span></header>' +
@@ -320,89 +293,51 @@
     '</div>' +
     '<p class="inst-cap">' + esc(Hd.text) + '</p>' +
     '</section>' +
-    // Instruments 02 and 03: file size and the benchmark channels.
-    '<div class="inst-grid">' +
-    '<section class="inst" aria-labelledby="inst-2">' +
-    '<header class="inst-head"><span class="mono">Instrument 02</span><h4 id="inst-2">File size</h4></header>' +
-    '<div class="sizes">' + sizeRow('sz-tak', esc(T.name), tSize, Hd.size) +
-    sizeRow('sz-base', esc(Hd.baselineName), tSize, Hd.size) +
-    sizeRow('sz-src', 'Source model', sSize, Hd.sourceSize) +
-    '<div class="sz-axis" aria-hidden="true">' + sizeAxis + '</div></div>' +
-    '<p class="sz-sum"><b>' + esc(Hd.smaller) + '</b><span class="lbl">smaller</span></p>' +
-    '</section>' +
-    '<section class="inst" aria-labelledby="inst-3">' +
-    '<header class="inst-head"><span class="mono">Instrument 03</span><h4 id="inst-3">Benchmark channels</h4></header>' +
-    '<ol class="channels">' + T.benchmarks.map((b, i) =>
+    '<ol class="ai-channels" aria-label="Benchmark channels">' + T.benchmarks.map((b, i) =>
       '<li><span class="ch-no">CH ' + pad(i + 1) + '</span>' +
       '<div class="ch-model"><b>' + esc(b.model) + '</b><span class="lbl">' + esc(b.task) + '</span></div>' +
-      '<div class="ch-row"><div class="ch-track" aria-hidden="true"><div class="ch-bar" style="--w:' + (b.delta / dmax * 100).toFixed(2) + '%"></div></div>' +
-      '<span class="ch-val">' + esc(b.value) + '</span></div>' +
-      '<p class="ch-text">' + (b.text === Hd.text ? '+' + b.delta.toFixed(2) + ' points. Full readout in Instrument 01.' : esc(b.text)) + '</p></li>').join('') +
-    '</ol>' +
-    '<p class="ch-scale" aria-hidden="true"><span>0</span><span>' + dmax + ' points</span></p>' +
-    '</section>' +
-    '</div>' +
-    // The pipeline, drawn as a launch sequence.
-    '<section class="inst inst-seq" aria-labelledby="inst-seq">' +
-    '<header class="inst-head"><span class="mono">Launch sequence</span><h4 id="inst-seq">How ' + esc(T.name) + ' works</h4>' +
-    '<span class="inst-meta">' + AI.takHow.length + ' stages</span></header>' +
-    '<ol class="seq">' + AI.takHow.map((s, i) =>
-      '<li style="--k:' + i + '"><span class="seq-node" aria-hidden="true"></span>' +
-      '<p class="seq-h"><span class="mono">' + pad(i + 1) + '</span><b>' + esc(s.step) + '</b></p>' +
-      '<p class="seq-t">' + esc(s.text) + '</p></li>').join('') +
-    '</ol></section>' +
-    // Notes and the extra systems, side by side.
-    '<div class="inst-grid even">' +
-    '<section class="inst" aria-labelledby="inst-4">' +
-    '<header class="inst-head"><span class="mono">Systems notes</span><h4 id="inst-4">Design and evaluation</h4></header>' +
-    numbered(T.points, 'notes') + '</section>' +
-    '<section class="inst" aria-labelledby="inst-5">' +
-    '<header class="inst-head"><span class="mono">Additional systems</span><h4 id="inst-5">Also on board</h4></header>' +
-    numbered(AI.takExtras, 'notes') + '</section>' +
-    '</div>' +
-    // Lineage and the published models.
-    '<div class="inst-grid even">' +
-    '<section class="inst heritage" aria-labelledby="inst-6">' +
-    '<header class="inst-head"><span class="mono">Heritage</span><h4 id="inst-6">Lineage</h4></header>' +
-    '<p class="heritage-t">' + esc(AI.lineage) + '</p></section>' +
-    (hf ? '<section class="inst hf" aria-labelledby="inst-7">' +
-      '<header class="inst-head"><span class="mono">Published</span><h4 id="inst-7">Hugging Face</h4></header>' +
-      link(hf.href, '<b class="hf-n">' + esc(hf.models) + '</b><span class="hf-l">' + esc(hf.label) + '</span>' + IC.out, 'hf-link') +
-      '</section>' : '') +
-    '</div>' +
-    '<footer class="tak-foot"><div class="tak-links">' +
-    takLinks.map((l) => link(l.href, '<span>' + esc(l.label) + '</span>' + IC.out, 'link-line')).join('') +
-    '</div><p class="private">' + IC.lock + '<span>' + esc(T.note) + '</span></p></footer>' +
-    '</div>';
+      '<span class="ch-val">+' + b.delta.toFixed(2) + '</span>' +
+      '<div class="ch-track" aria-hidden="true"><div class="ch-bar" style="--w:' + (b.delta / dmax * 100).toFixed(2) + '%"></div></div>' +
+      '<p class="ch-text">' + (b.text === Hd.text ? 'points over ' + esc(Hd.baselineName) + ' at the same ' + esc(Hd.size) : esc(b.text)) + '</p></li>').join('') +
+    '</ol></div>';
 
-  // The rest of the program: two primary payloads, then the smaller ones.
-  function aiCard(p, size) {
+  // Rows: the same summary as the launch manifest; the body carries each project's detail.
+  const numbered = (list, cls) => '<ol class="' + cls + '">' + list.map((p, i) => '<li><span class="mono">' + pad(i + 1) + '</span><span>' + esc(p) + '</span></li>').join('') + '</ol>';
+  const rowLinks = (p) =>
+    (p.links && p.links.length ? '<div class="m-links">' + p.links.map((l) => link(l.href, '<span>' + esc(l.label) + '</span>' + IC.out, 'link-line')).join('') + '</div>' : '') +
+    (p.note ? '<p class="m-note">' + IC.lock + '<span>' + esc(p.note) + '</span></p>' : '');
+  function aiBody(p) {
+    if (p.id === T.id) {
+      return '<div class="m-text"><p>' + esc(T.description) + '</p>' +
+        '<ul class="m-stack" aria-label="Stack">' + T.stack.map((s) => '<li>' + esc(s) + '</li>').join('') + '</ul></div>' +
+        readout +
+        '<div class="m-text"><p class="lbl ai-sub">How ' + esc(T.name) + ' works</p>' +
+        '<ol class="ai-points">' + AI.takHow.map((s, i) => '<li><span class="mono">' + pad(i + 1) + '</span><span><b>' + esc(s.step) + '.</b> ' + esc(s.text) + '</span></li>').join('') + '</ol>' +
+        '<p class="m-detail">' + esc(AI.lineage) + '</p>' + rowLinks(T) + '</div>';
+    }
     const flow = p.workflow && p.workflow.length
       ? '<div class="flow-wrap"><p class="lbl">Workflow</p><ol class="flow">' +
         p.workflow.map((w, i) => '<li><span class="mono">' + pad(i + 1) + '</span><span>' + esc(w) + '</span></li>').join('') + '</ol></div>'
       : '';
-    const pts = p.points && p.points.length ? numbered(p.points, 'ai-points') : '';
-    const links = p.links && p.links.length
-      ? '<div class="m-links">' + p.links.map((l) => link(l.href, '<span>' + esc(l.label) + '</span>' + IC.out, 'link-line')).join('') + '</div>'
-      : '';
-    const note = p.note ? '<p class="m-note">' + IC.lock + '<span>' + esc(p.note) + '</span></p>' : '';
-    return '<article class="ai-card is-' + size + '" id="payload-' + p.id + '" aria-labelledby="ai-' + p.id + '-t">' +
-      '<p class="ai-meta">' + launchMeta(p) + '</p>' +
-      '<h4 class="ai-name" id="ai-' + p.id + '-t">' + esc(p.name) + '</h4>' +
-      '<p class="ai-tag">' + esc(p.tag) + '</p>' +
-      '<p class="ai-desc">' + esc(p.description) + '</p>' + flow + pts +
-      (links || note ? '<footer class="ai-foot">' + links + note + '</footer>' : '') +
-      '</article>';
+    return '<div class="m-text"><p>' + esc(p.description) + '</p>' + flow +
+      (p.points && p.points.length ? numbered(p.points, 'ai-points') : '') + rowLinks(p) + '</div>';
   }
-  const primary = AI.projects.slice(0, 2), secondary = AI.projects.slice(2);
-  $('#lab-bay').innerHTML =
-    (primary.length ? '<section class="lab-group" aria-labelledby="lab-g2"><h3 class="sec-index sub-index" id="lab-g2"><span class="sec-no">02.2</span><span>Primary payloads</span></h3>' +
-      '<div class="ai-major">' + primary.map((p) => aiCard(p, 'major')).join('') + '</div></section>' : '') +
-    (secondary.length ? '<section class="lab-group" aria-labelledby="lab-g3"><h3 class="sec-index sub-index" id="lab-g3"><span class="sec-no">02.3</span><span>Secondary payloads</span></h3>' +
-      '<div class="ai-minor">' + secondary.map((p) => aiCard(p, 'minor')).join('') + '</div></section>' : '');
+  function aiRow(p) {
+    return '<details class="mrow" id="' + anchorFor(p.id) + '">' +
+      '<summary><span class="m-seq">' + (launchNo.has(p.id) ? pad(launchNo.get(p.id)) : '··') + '</span>' +
+      '<span class="m-name">' + esc(p.name) + '</span>' +
+      '<span class="m-meta"><span class="m-date">' + (p.started ? esc(month(p.started)) : '') + '</span>' +
+      '<span class="m-class">' + esc(p.tag.replace(/^Flagship · /, '')) + '</span>' +
+      (p.id === T.id ? '<span class="m-flag">Flagship</span>' : '') + '</span>' +
+      '<span class="m-tog" aria-hidden="true"></span></summary>' +
+      '<div class="m-body">' + aiBody(p) + '</div></details>';
+  }
+  $('#ai-manifest').innerHTML =
+    '<div class="m-cols" aria-hidden="true"><span class="lbl">Launch</span><span class="lbl">Started</span><span class="lbl">Program</span><span class="lbl">Class</span><span></span><span></span></div>' +
+    [T].concat(AI.projects).map(aiRow).join('');
 
   // Gauges settle into place the first time they come into view.
-  const gauges = $$('.score, .sizes, .channels, .seq', $('#tak'));
+  const gauges = $$('.score, .ai-channels', $('#ai-manifest'));
   if (!reduce.matches && 'IntersectionObserver' in window) {
     gauges.forEach((g) => g.classList.add('is-pre'));
     const gio = new IntersectionObserver((entries) => {

@@ -14,7 +14,7 @@
     headline: 'Cybersecurity Professional',
     tagline: 'Security, end to end.',
     location: 'Des Moines, Iowa',
-    status: 'Open to security roles · Des Moines, IA & remote',
+    status: 'Searching for security roles · Des Moines, IA & remote',
     summary: "Navy veteran, former federal police officer, and security researcher with two CVEs. I find what's broken, document it clearly, and help get it fixed.",
     focusAreas: ['SOC analysis', 'vulnerability assessment', 'incident response', 'application security'],
 
@@ -46,9 +46,9 @@
         org: 'Self-employed',
         place: 'Des Moines, IA',
         coords: { lat: 41.59, lon: -93.62, label: '41.59°N 93.62°W' },
-        start: '2024-06', end: null,
-        dates: 'June 2024 – Present',
-        years: '2024 – present',
+        start: '2024-06', end: '2026-10',
+        dates: 'June 2024 – October 2026',
+        years: '2024 – 2026',
         tags: ['Self-employed', 'Bugcrowd', 'HackerOne'],
         awards: ['2 CVEs assigned'],
         intro: 'After leaving the VA, I went all in on cybersecurity: full-time study for my B.S. alongside authorized bug bounty work on Bugcrowd and HackerOne. I test web applications inside each program\'s published scope, looking for the places where an application trusts the wrong person.',
@@ -218,7 +218,7 @@
       { date: '2022-09', label: 'Senior Police Officer, Department of Veterans Affairs', ref: 'va' },
       { date: '2024-06', label: 'Full-time study and independent security research begin', ref: 'research' },
       { date: '2025-04', label: 'CompTIA Security+ and A+', ref: 'education' },
-      { date: '2026-10', label: 'B.S. degree requirements completed', ref: 'education' },
+      { date: '2026-10', label: 'B.S. degree requirements completed; full-time study and security research end', ref: 'education' },
     ],
 
     tak: {
@@ -274,7 +274,7 @@
         name: 'Pearl Tide',
         tag: 'Mobile game · Three.js · Capacitor',
         started: '2026-10',
-        description: 'A cozy 3D mermaid game for iPhone and Android. Players swim a reef, a kelp forest, and crystal caverns, help the sea creatures they meet, and decorate a home in a sunken ship across a four-chapter story.',
+        description: 'A cozy 3D mermaid game, live on the App Store for iPhone. Players swim a reef, a kelp forest, and crystal caverns, help the sea creatures they meet, and decorate a home in a sunken ship across a four-chapter story.',
         detail: 'Built in Three.js and wrapped for iOS and Android with Capacitor, with touch and desktop controls and adjustable graphics levels for phones.',
         image: { src: url('assets/img/pearltide.jpg'), w: 1024, h: 500, alt: 'Pearl Tide game art' },
         links: [
@@ -356,7 +356,7 @@
           ],
           links: [{ label: 'GitHub', href: 'https://github.com/Buggyboi139/glass-skull' }],
         },
-        { id: 'smolllm', name: 'smol-llm', tag: 'Python', started: '2026-06', description: 'A tiny GPT-style language model built from scratch for testing tokenizers, data quality, and training behavior.', points: [], links: [{ label: 'GitHub', href: 'https://github.com/Buggyboi139/smol-llm' }] },
+        { id: 'smolllm', name: 'Smol-LLM', tag: 'Python', started: '2026-06', description: 'A tiny GPT-style language model built from scratch for testing tokenizers, data quality, and training behavior.', points: [], links: [{ label: 'GitHub', href: 'https://github.com/Buggyboi139/smol-llm' }] },
         { id: 'llamacalc', name: 'LlamaCalc', tag: 'JavaScript', started: '2026-06', description: 'A static command workbench that builds llama-cli and llama-server commands in the browser.', points: [], links: [{ label: 'Live site', href: 'https://llamabuilding.com/' }, { label: 'GitHub', href: 'https://github.com/Buggyboi139/llamacalc' }] },
       ],
     },
